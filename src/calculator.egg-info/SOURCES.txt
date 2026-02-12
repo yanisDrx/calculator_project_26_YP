@@ -1,0 +1,10 @@
+LICENCE
+README.md
+pyproject.toml
+src/calculator/__init__.py
+src/calculator/simple_calculator.py
+src/calculator.egg-info/PKG-INFO
+src/calculator.egg-info/SOURCES.txt
+src/calculator.egg-info/dependency_links.txt
+src/calculator.egg-info/top_level.txt
+tests/test_simple_calculator.py

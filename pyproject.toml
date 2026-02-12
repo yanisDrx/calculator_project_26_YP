@@ -1,0 +1,17 @@
+[project]
+name = "CALCULATOR_PROJECT_26_YP"
+version = "0.0.1"
+authors = [{name = "Yanis PIRES PORTELADA"}]
+description = "Simple calculator for packaging demo"
+license = {text = "Unlicense"}
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+test = ["pytest>=7.0", "pytest-cov", "pylint", "black", "radon"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
