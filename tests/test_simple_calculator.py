@@ -15,12 +15,15 @@ from calculator import SimpleCalculator
 
 calc = SimpleCalculator()
 
+def test_validate_operands():
+    pass
+
 def test_add():
     res = calc.add(2, 3)
     return res
 
 def test_substract():
-    res = calc.substract(2, 3)
+    res = calc.subtract(2, 3)
     return res
 
 def test_multiply():
@@ -31,7 +34,7 @@ def test_divide():
     res = calc.divide(0,4)
     return res
     
-# print(test_add())
-# print(test_substract())
-# print(test_multiply())
+print(test_add())
+print(test_substract())
+print(test_multiply())
 print(test_divide())
