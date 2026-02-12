@@ -1,0 +1,11 @@
+pytest
+mypy
+black
+ruff
+
+[test]
+pytest>=7.0
+pytest-cov
+pylint
+black
+radon
