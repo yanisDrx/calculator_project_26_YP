@@ -1,9 +1,8 @@
 """
-Title : test_simple_calculator.py
+Title : test_simple_calculator_manual.py
 
-Objective : This module contains unit tests for the SimpleCalculator class defined in simple_calculator.py.
-It tests the basic arithmetic operations: addition, subtraction, multiplication, and division,
-including edge cases such as division by zero.
+Objective : Tests unitaires simples pour la classe SimpleCalculator
+sans utiliser pytest. Utilise assert et try/except pour vérifier le comportement.
 
 Author : Yanis PIRES PORTELADA
 
@@ -12,29 +11,73 @@ Date : 2026-02-12
 
 from calculator import SimpleCalculator
 
-
 calc = SimpleCalculator()
 
-def test_validate_operands():
-    pass
-
+# Test for add()
 def test_add():
-    res = calc.add(2, 3)
-    return res
+    # tests valides
+    assert calc.add(2, 3) == 5
+    assert calc.add(0, 0) == 0
+    assert calc.add(-2, 3) == 1
 
-def test_substract():
-    res = calc.subtract(2, 3)
-    return res
+    # tests invalides
+    for a, b in [('nah', 3), (0.4, 3), (None, 2)]:
+        try:
+            calc.add(a, b)
+            print(f"ERROR: add({a}, {b}) did not raise ValueError")
+        except ValueError:
+            print(f"PASS: add({a}, {b}) raised ValueError")
 
+# Test for subtract()
+def test_subtract():
+    assert calc.subtract(5, 2) == 3
+    assert calc.subtract(0, 0) == 0
+    assert calc.subtract(-2, -3) == 1
+
+    for a, b in [('nah', 3), (0.4, 3), (None, 2)]:
+        try:
+            calc.subtract(a, b)
+            print(f"ERROR: subtract({a}, {b}) did not raise ValueError")
+        except ValueError:
+            print(f"PASS: subtract({a}, {b}) raised ValueError")
+
+# Test for multiply()
 def test_multiply():
-    res = calc.multiply('nah', 3)
-    return res
+    assert calc.multiply(3, 4) == 12
+    assert calc.multiply(0, 5) == 0
+    assert calc.multiply(-2, 3) == -6
 
+    for a, b in [('nah', 3), (0.4, 3), (None, 2)]:
+        try:
+            calc.multiply(a, b)
+            print(f"ERROR: multiply({a}, {b}) did not raise ValueError")
+        except ValueError:
+            print(f"PASS: multiply({a}, {b}) raised ValueError")
+
+# Test for divide()
 def test_divide():
-    res = calc.divide(0,4)
-    return res
-    
-print(test_add())
-print(test_substract())
-print(test_multiply())
-print(test_divide())
+    assert calc.divide(10, 2) == 5.0
+    assert calc.divide(-6, 3) == -2.0
+    assert calc.divide(0, 5) == 0.0
+
+    # dividing by zero should raise ValueError
+    try:
+        calc.divide(5, 0)
+        print("ERROR: divide(5, 0) did not raise ValueError")
+    except ValueError:
+        print("PASS: divide(5, 0) raised ValueError")
+
+    for a, b in [('nah', 3), (0.4, 3), (None, 2)]:
+        try:
+            calc.divide(a, b)
+            print(f"ERROR: divide({a}, {b}) n'a pas levé ValueError")
+        except ValueError:
+            print(f"PASS: divide({a}, {b}) a levé ValueError")
+
+# Running tests
+if __name__ == "__main__":
+    test_add()
+    test_subtract()
+    test_multiply()
+    test_divide()
+    print("Tous les tests ont été exécutés.")
