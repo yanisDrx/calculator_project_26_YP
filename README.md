@@ -275,6 +275,121 @@ Le code est simple, lisible et maintenable.
 
 ---
 
+# 🧹 Gestion des fichiers inutiles avec `.gitignore`
+
+Afin de respecter les bonnes pratiques Git, certains fichiers générés automatiquement ne doivent pas être versionnés.
+
+Ces fichiers peuvent être recréés à tout moment et ne font pas partie du code source.
+
+---
+
+## 📄 Contenu du fichier `.gitignore`
+
+Le fichier `.gitignore` (placé à la racine du projet) contient :
+
+```gitignore
+# Build
+build/
+dist/
+
+# Egg metadata
+*.egg-info/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+
+# Virtual environments
+venv/
+.package_env/
+.env/
+
+# OS files
+.DS_Store
+Thumbs.db
+```
+
+---
+
+## 📌 Pourquoi ces éléments sont ignorés ?
+
+| Élément | Raison |
+|----------|--------|
+| `build/` | Dossier généré lors du packaging |
+| `dist/` | Contient les fichiers `.whl` et `.tar.gz` générés |
+| `*.egg-info/` | Métadonnées générées par `pip install -e .` |
+| `__pycache__/` | Fichiers compilés Python |
+| `*.pyc` | Bytecode Python |
+| `.pytest_cache/` | Cache automatique de pytest |
+| `venv/` | Environnement virtuel local |
+| Fichiers OS | Fichiers système inutiles |
+
+---
+
+## 🛠️ Commandes utilisées pour nettoyer le repository
+
+Après avoir ajouté le `.gitignore`, les fichiers déjà suivis par Git ont dû être retirés de l’index.
+
+### Méthode propre utilisée :
+
+```bash
+git rm -r --cached .
+git add .
+git commit -m "Apply proper gitignore and clean repository"
+```
+
+### Explication :
+
+- `git rm -r --cached .`
+  → Supprime tous les fichiers de l’index Git (sans les supprimer du disque)
+
+- `git add .`
+  → Réajoute uniquement les fichiers non ignorés
+
+- `git commit`
+  → Valide le nettoyage
+
+---
+
+## 🔎 Vérification
+
+Pour vérifier que tout est propre :
+
+```bash
+git status
+```
+
+Les dossiers suivants ne doivent plus apparaître :
+
+- `build/`
+- `dist/`
+- `*.egg-info/`
+- `__pycache__/`
+- environnements virtuels
+
+---
+
+# 🎯 Résultat
+
+Le repository final ne contient que :
+
+- Le code source
+- Les tests
+- Les fichiers de configuration
+- La documentation
+
+Cela garantit :
+
+- Un dépôt propre
+- Une meilleure lisibilité
+- Le respect des standards professionnels
+- Une collaboration facilitée
+
+---
+
 # 🎯 Qualité globale du projet
 
 Le projet respecte :
