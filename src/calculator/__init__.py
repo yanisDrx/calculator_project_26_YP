@@ -11,7 +11,6 @@ Date: 2026-02-12
 Licence: Unlicense
 """
 
-
 from .simple_calculator import SimpleCalculator
 
 __all__ = ["SimpleCalculator"]
