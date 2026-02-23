@@ -393,6 +393,8 @@ Cela garantit :
 
 ---
 
+*DEPLOIEMENT NON INDIQUE*
+
 # 🎯 Qualité globale du projet
 
 Le projet respecte :
@@ -428,4 +430,5 @@ Ce projet démontre :
 - Le respect des standards industriels
 
 Projet prêt pour publication et évolution future.
+
 
