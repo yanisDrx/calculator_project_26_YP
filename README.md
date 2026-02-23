@@ -21,7 +21,7 @@ Yanis PIRES PORTELADA
 
 ---
 
-# 🏗️ Processus de création du package
+# 🏗️ Processus de création du package *pas création, plus installation ?*
 
 Voici les étapes suivies pour créer le package :
 
@@ -86,6 +86,7 @@ Vérifie que :
 - `a` et `b` sont des entiers
 - Pour `divide()`, `b` est différent de 0
 
+Cette méthode est réutilisée dans les autres méthodes ensuite
 ---
 
 ### `add(a: int, b: int) -> int`
@@ -112,11 +113,11 @@ Retourne un entier.
 
 ---
 
-### `divide(a: int, b: int) -> int`
+### `divide(a: int, b: int) -> int` *(float)*
 
 Divise deux entiers.
 
-Retourne un entier.
+Retourne un entier. *(ou un float)*
 
 ---
 
@@ -133,7 +134,7 @@ pytest
 Installation :
 
 ```bash
-pip install pytest
+pip install pytest    --    pip -m pytest
 ```
 
 ---
@@ -168,7 +169,7 @@ Cela signifie :
 
 ---
 
-## 🧪 Modifier les tests pour expérimenter
+## 🧪 Modifier les tests pour expérimenter  *pas le bon mot expérimenter*
 
 Pour tester d’autres opérations :
 
@@ -199,24 +200,27 @@ pytest
 ```
 
 ---
+*-- CORRECTIONS : les explications de l'intérêt des modules pylint etc AU DEBUT des paragraphes, pas a la fin --*
 
 # 🔎 Analyse qualité avec Pylint
 
 ## 📦 Installation
 
 ```bash
-pip install pylint
+pip install pylint      --      python -m pylint
 ```
 
 ## ▶️ Commande utilisée
 
 ```bash
-pylint src/calculator
+pylint src/calculator 
 ```
 
 ---
 
 ## 🛠️ Corrections apportées
+
+*Objectif : respecter les standards PEP8 et améliorer la lisibilité.*
 
 Pour améliorer la qualité du code, les corrections suivantes ont été appliquées :
 
@@ -228,8 +232,7 @@ Pour améliorer la qualité du code, les corrections suivantes ont été appliqu
 - ✅ Suppression des imports inutilisés
 - ✅ Respect des longueurs de ligne
 
-Objectif : respecter les standards PEP8 et améliorer la lisibilité.
-
+*Score initial pylint : 2,5/10 - score final : 10/10*
 ---
 
 # 📊 Analyse de complexité avec Radon
@@ -411,6 +414,8 @@ Le projet respecte :
 - Ajouter un workflow GitHub Actions
 - Ajouter couverture de code (coverage.py)
 
+*SAVOIR DE QUOI ON PARLE, C'EST MIEUX*
+
 ---
 
 # 📌 Conclusion
@@ -423,3 +428,4 @@ Ce projet démontre :
 - Le respect des standards industriels
 
 Projet prêt pour publication et évolution future.
+
