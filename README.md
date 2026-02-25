@@ -1,3 +1,4 @@
+![CI](https://github.com/TON_USER/TON_REPO/actions/workflows/main.yml/badge.svg)
 # 🧮 PROJECT CALCULATOR – ORGANISATION DU CODE
 
 Bienvenue dans mon projet : un package Python implémentant une calculatrice simple permettant d’effectuer des opérations arithmétiques de base.
