@@ -1,3 +1,4 @@
+![CI](https://github.com/yanisDrx/calculator_project_26_YP/actions/workflows/main.yml/badge.svg)
 # 🧮 PROJECT CALCULATOR – ORGANISATION DU CODE
 
 Bienvenue dans mon projet : un package Python implémentant une calculatrice simple permettant d’effectuer des opérations arithmétiques de base.
@@ -21,7 +22,7 @@ Yanis PIRES PORTELADA
 
 ---
 
-# 🏗️ Processus de création du package *pas création, plus installation ?*
+# 🏗️ Processus d'installation du package 
 
 Voici les étapes suivies pour créer le package :
 
@@ -50,17 +51,13 @@ Permet de définir :
 - Les dépendances
 - Le système de build
 
-### 3️⃣ Installation en mode editable
+### 3️⃣ Installation du package en mode editable
+
+Cette commande installe le package en mode développement afin que toute modification du code soit immédiatement prise en compte, sans avoir besoin de le réinstaller.
 
 ```bash
 pip install -e .
 ```
-
-Cela permet :
-- D’installer le package localement
-- De modifier le code sans réinstaller à chaque changement
-
----
 
 # ⚙️ Installation du projet
 
@@ -113,15 +110,17 @@ Retourne un entier.
 
 ---
 
-### `divide(a: int, b: int) -> int` *(float)*
+### `divide(a: int, b: int) -> float
 
 Divise deux entiers.
 
-Retourne un entier. *(ou un float)*
+Retourne un float
 
 ---
 
 # 🧪 Tests unitaires
+
+Les tests unitaires permettent de vérifier automatiquement que chaque partie du package fonctionne correctement et d’éviter d’introduire des erreurs lors des modifications du code.
 
 ## 📦 Package utilisé
 
@@ -169,7 +168,7 @@ Cela signifie :
 
 ---
 
-## 🧪 Modifier les tests pour expérimenter  *pas le bon mot expérimenter*
+## 🧪 Modification des tests 
 
 Pour tester d’autres opérations :
 
@@ -200,17 +199,27 @@ pytest
 ```
 
 ---
-*-- CORRECTIONS : les explications de l'intérêt des modules pylint etc AU DEBUT des paragraphes, pas a la fin --*
 
 # 🔎 Analyse qualité avec Pylint
 
-## 📦 Installation
+L’analyse "statique" du code permet de détecter automatiquement les erreurs potentielles, les mauvaises pratiques et les écarts aux standards comme PEP8, et permet. Les problèmes identifiés peuvent être corrigés manuellement (comme ici) ou automatiquement à l’aide d’outils de formatage comme black. Ces deux étapes permettent d'améliorer la lisibilité globale du code.
+
+## 📦 Package utilisé
+
+Les tests ont été réalisés avec :
+
+```
+pylint
+```
+Installation :
 
 ```bash
 pip install pylint      --      python -m pylint
 ```
 
-## ▶️ Commande utilisée
+## ▶️ Commande d’exécution des tests
+
+Depuis la racine du projet :
 
 ```bash
 pylint src/calculator 
@@ -218,9 +227,23 @@ pylint src/calculator
 
 ---
 
-## 🛠️ Corrections apportées
+## 🛠️ Résultats et corrections
 
-*Objectif : respecter les standards PEP8 et améliorer la lisibilité.*
+Exemple d'une sortie console sur le résultat de l'analyse :
+
+```
+************* Module calculator
+src/calculator.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+src/calculator.py:3:4: R1705: Unnecessary "else" after "return" (no-else-return)
+src/calculator.py:5:0: C0103: Variable name "x" doesn't conform to snake_case naming style (invalid-name)
+src/calculator.py:8:0: C0116: Missing function or method docstring (missing-function-docstring)
+src/calculator.py:12:8: W0612: Unused variable 'result' (unused-variable)
+src/calculator.py:15:0: C0301: Line too long (120/100) (line-too-long)
+src/calculator.py:20:0: C0330: Wrong hanging indentation (bad-continuation)
+
+------------------------------------------------------------------
+Your code has been rated at 6.00/10 (previous run: 5.50/10, +0.50)
+```
 
 Pour améliorer la qualité du code, les corrections suivantes ont été appliquées :
 
@@ -232,12 +255,21 @@ Pour améliorer la qualité du code, les corrections suivantes ont été appliqu
 - ✅ Suppression des imports inutilisés
 - ✅ Respect des longueurs de ligne
 
-*Score initial pylint : 2,5/10 - score final : 10/10*
 ---
 
 # 📊 Analyse de complexité avec Radon
 
-## 📦 Installation
+L’analyse de complexité permet de mesurer automatiquement la "**complexité cyclomatique**". Un code trop complexe est plus difficile à comprendre, tester et maintenir. Les résultats peuvent être utilisés pour prioriser les refactorings et améliorer la lisibilité globale du code.
+
+## 📦 Package utilisé
+
+L’outil utilisé pour cette analyse est :  
+
+```
+radon
+```
+
+Installation :  
 
 ```bash
 pip install radon
@@ -245,11 +277,16 @@ pip install radon
 
 ## ▶️ Commande utilisée
 
+Depuis la racine du projet :
 ```bash
 radon cc src/calculator -s
 ```
+- cc -> complexity cyclomatique
+- -s -> affiche les scores de manière synthétique
 
-## 📈 Résultats obtenus
+## 🛠️ Résultats et interprétation
+
+Exemple de sortie console :
 
 ```
 M 20:4 SimpleCalculator._validate_operands - A (5)
@@ -261,9 +298,7 @@ M 30:4 SimpleCalculator.subtract - A (1)
 M 35:4 SimpleCalculator.multiply - A (1)
 ```
 
-### Interprétation
-
-Toutes les méthodes ont un score **A**.
+### Échelle Radon :
 
 Échelle Radon :
 
@@ -272,8 +307,8 @@ Toutes les méthodes ont un score **A**.
 - C (11–20) : Complexité moyenne
 - D+ : Code complexe
 
-Conclusion :
 
+Dans le cas de ce projet, outes les méthodes ont un score **A**.
 Le code est simple, lisible et maintenable.
 
 ---
@@ -375,6 +410,95 @@ Les dossiers suivants ne doivent plus apparaître :
 
 ---
 
+# 📦 Déploiement sur PyPI Test (TestPyPI)
+
+Une fois votre package Python prêt et testé localement, il est possible de le publier sur **TestPyPI**, un environnement de test officiel de PyPI, avant de le publier sur le dépôt officiel. Cela permet de vérifier que le package peut être installé et utilisé correctement.
+
+---
+
+## 🔧 Prérequis
+
+- Installer **twine** pour la gestion de la publication :
+```bash
+pip install twine
+```
+
+- Vérifier que votre `pyproject.toml` contient bien les informations nécessaires :
+  - `name` : nom du package
+  - `version` : version du package
+  - `authors` : auteur(s)
+  - `description` : description courte
+  - `dependencies` : dépendances éventuelles
+  - `readme` : chemin vers le README.md
+
+---
+
+## 🏗️ Construction des distributions
+
+Depuis la racine du projet, exécuter :
+
+```bash
+python -m build
+```
+
+Cela génère un dossier `dist/` contenant :
+- `calculator_project_26_YP-x.x.x-py3-none-any.whl` → fichier binaire
+- `calculator_project_26_YP-x.x.x.tar.gz` → fichier source
+
+---
+
+## 🚀 Publication sur TestPyPI
+
+1. Publier le package sur TestPyPI :
+```bash
+twine upload --repository testpypi dist/*
+```
+
+2. Lorsque vous y êtes invité, entrer vos identifiants TestPyPI :
+- Nom d’utilisateur
+- Mot de passe
+
+---
+
+## 📥 Installation depuis TestPyPI
+
+Pour tester l’installation de votre package depuis TestPyPI, créer un environnement virtuel et exécuter :
+
+```bash
+pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple calculator_project_26_YP
+```
+
+---
+
+## ✅ Vérification
+
+Après l’installation, vérifier que le package fonctionne correctement :
+
+```python
+from calculator.simple_calculator import SimpleCalculator
+
+calc = SimpleCalculator()
+print(calc.add(3, 5))  # Doit afficher 8
+```
+
+---
+
+## ⚠️ Conseils
+
+- Toujours tester votre package sur TestPyPI avant de le publier sur le dépôt officiel.
+- Mettre à jour le numéro de version dans `pyproject.toml` pour chaque nouvelle publication.
+- Nettoyer les fichiers générés (`dist/`, `build/`) avant chaque nouveau build pour éviter les conflits.
+
+---
+
+## 🌐 Publication finale sur PyPI
+
+Une fois les tests réussis sur TestPyPI, publier sur PyPI officiel :
+
+```bash
+twine upload dist/*
+```
+
 # 🎯 Résultat
 
 Le repository final ne contient que :
@@ -390,10 +514,9 @@ Cela garantit :
 - Une meilleure lisibilité
 - Le respect des standards professionnels
 - Une collaboration facilitée
+- Un package prêt à être déployé sur TestPyPI ou PyPI officiel
 
 ---
-
-*DEPLOIEMENT NON INDIQUE*
 
 # 🎯 Qualité globale du projet
 
@@ -405,7 +528,8 @@ Le projet respecte :
 - Analyse statique
 - Analyse de complexité
 - Bonnes pratiques PEP8
-- Package installable
+- Package installable et déployable sur PyPI
+- Processus de publication documenté (TestPyPI et PyPI)
 
 ---
 
@@ -413,10 +537,11 @@ Le projet respecte :
 
 - Ajouter une interface CLI
 - Ajouter plus de cas de tests
-- Ajouter un workflow GitHub Actions
+- Ajouter un workflow GitHub Actions pour automatiser tests et déploiement
 - Ajouter couverture de code (coverage.py)
+- Intégrer la publication automatisée sur TestPyPI pour chaque version
 
-*SAVOIR DE QUOI ON PARLE, C'EST MIEUX*
+> Ces améliorations sont des propositions **générées par IA**, et ne sont **pas expliquées** ici pour la simple et bonne raison que **je ne les maîtrise pas**.
 
 ---
 
@@ -428,7 +553,7 @@ Ce projet démontre :
 - L’implémentation de tests unitaires
 - L’analyse de qualité professionnelle
 - Le respect des standards industriels
+- La préparation et documentation du processus de déploiement sur PyPI
 
-Projet prêt pour publication et évolution future.
-
+Projet prêt pour publication, distribution et évolution future.
 

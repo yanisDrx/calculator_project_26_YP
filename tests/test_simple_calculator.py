@@ -13,6 +13,7 @@ from calculator import SimpleCalculator
 
 calc = SimpleCalculator()
 
+
 # Test for add()
 def test_add():
     """Tests the add() method for valid and invalid inputs."""
@@ -22,7 +23,7 @@ def test_add():
     assert calc.add(-2, 3) == 1
 
     # invalid tests
-    for a, b in [('nah', 3), (0.4, 3), (None, 2)]:
+    for a, b in [("nah", 3), (0.4, 3), (None, 2)]:
         try:
             calc.add(a, b)
             print(f"ERROR: add({a}, {b}) did not raise ValueError")
@@ -37,7 +38,7 @@ def test_subtract():
     assert calc.subtract(0, 0) == 0
     assert calc.subtract(-2, -3) == 1
 
-    for a, b in [('nah', 3), (0.4, 3), (None, 2)]:
+    for a, b in [("nah", 3), (0.4, 3), (None, 2)]:
         try:
             calc.subtract(a, b)
             print(f"ERROR: subtract({a}, {b}) did not raise ValueError")
@@ -52,7 +53,7 @@ def test_multiply():
     assert calc.multiply(0, 5) == 0
     assert calc.multiply(-2, 3) == -6
 
-    for a, b in [('nah', 3), (0.4, 3), (None, 2)]:
+    for a, b in [("nah", 3), (0.4, 3), (None, 2)]:
         try:
             calc.multiply(a, b)
             print(f"ERROR: multiply({a}, {b}) did not raise ValueError")
@@ -75,7 +76,7 @@ def test_divide():
     except ValueError:
         print("PASS: divide(5, 0) raised ValueError")
 
-    for a, b in [('nah', 3), (0.4, 3), (None, 2)]:
+    for a, b in [("nah", 3), (0.4, 3), (None, 2)]:
         try:
             calc.divide(a, b)
             print(f"ERROR: divide({a}, {b}) did not raise ValueError")

@@ -9,11 +9,13 @@ Author: Yanis PIRES PORTELADA
 Date: 2026-02-12
 """
 
+
 class SimpleCalculator:
     """
     A simple calculator that provides basic arithmetic operations
     on integer operands.
     """
+
     def __init__(self):
         pass
 
