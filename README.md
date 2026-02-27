@@ -59,8 +59,6 @@ Cette commande installe le package en mode développement afin que toute modific
 pip install -e .
 ```
 
----
-
 # ⚙️ Installation du projet
 
 ```bash
@@ -68,8 +66,6 @@ git clone https://github.com/yanisDrx/calculator_project_26_YP
 cd calculator_project_26_YP
 pip install -e .
 ```
-
----
 
 # 🔹 Gestion de l’environnement virtuel
 
@@ -91,7 +87,6 @@ python -m venv .env_calculator
 # Activation (Linux / macOS)
 source .env_calculator/bin/activate
 ```
-
 ---
 
 # 🧠 Fonctionnalités du package
@@ -135,7 +130,7 @@ Retourne un entier.
 
 ---
 
-### `divide(a: int, b: int) -> float`
+### `divide(a: int, b: int) -> float
 
 Divise deux entiers.
 
@@ -293,12 +288,18 @@ src/calculator.py:15:0: C0301: Line too long (120/100) (line-too-long)
 src/calculator.py:20:0: C0330: Wrong hanging indentation (bad-continuation)
 
 ------------------------------------------------------------------
-Your code has been rated at 9.0/10
+Your code has been rated at 6.00/10 (previous run: 5.50/10, +0.50)
 ```
 
-- ✅ Corrections d’architecture et docstrings pour PEP 257
-- ✅ `_validate_operands` centralise les vérifications
-- ✅ Gestion des exceptions claire pour toutes les méthodes
+Pour améliorer la qualité du code, les corrections suivantes ont été appliquées :
+
+- ✅ Suppression des espaces inutiles
+- ✅ Ajout de lignes vides en fin de fichier
+- ✅ Respect des conventions de nommage
+- ✅ Ajout de docstrings aux classes et méthodes
+- ✅ Correction de l'indentation
+- ✅ Suppression des imports inutilisés
+- ✅ Respect des longueurs de ligne
 
 ---
 
@@ -343,24 +344,206 @@ M 30:4 SimpleCalculator.subtract - A (1)
 M 35:4 SimpleCalculator.multiply - A (1)
 ```
 
-- Toutes les méthodes ont un score **A**
-- Code simple, lisible et maintenable
+### Échelle Radon :
+
+Échelle Radon :
+
+- A (1–5) : Très simple
+- B (6–10) : Acceptable
+- C (11–20) : Complexité moyenne
+- D+ : Code complexe
+
+
+Dans le cas de ce projet, outes les méthodes ont un score **A**.
+Le code est simple, lisible et maintenable.
 
 ---
 
 # 🧹 Gestion des fichiers inutiles avec `.gitignore`
 
-[...]
+Afin de respecter les bonnes pratiques Git, certains fichiers générés automatiquement ne doivent pas être versionnés.
 
-*(le bloc `.gitignore` reste inchangé, identique au précédent README)*
+Ces fichiers peuvent être recréés à tout moment et ne font pas partie du code source.
+
+---
+
+## 📄 Contenu du fichier `.gitignore`
+
+Le fichier `.gitignore` (placé à la racine du projet) contient :
+
+```gitignore
+# Build
+build/
+dist/
+
+# Egg metadata
+*.egg-info/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+
+# Virtual environments
+venv/
+.package_env/
+.env/
+
+# OS files
+.DS_Store
+Thumbs.db
+```
+
+---
+
+## 📌 Pourquoi ces éléments sont ignorés ?
+
+| Élément | Raison |
+|----------|--------|
+| `build/` | Dossier généré lors du packaging |
+| `dist/` | Contient les fichiers `.whl` et `.tar.gz` générés |
+| `*.egg-info/` | Métadonnées générées par `pip install -e .` |
+| `__pycache__/` | Fichiers compilés Python |
+| `*.pyc` | Bytecode Python |
+| `.pytest_cache/` | Cache automatique de pytest |
+| `venv/` | Environnement virtuel local |
+| Fichiers OS | Fichiers système inutiles |
+
+---
+
+## 🛠️ Commandes utilisées pour nettoyer le repository
+
+Après avoir ajouté le `.gitignore`, les fichiers déjà suivis par Git ont dû être retirés de l’index.
+
+### Méthode propre utilisée :
+
+```bash
+git rm -r --cached .
+git add .
+git commit -m "Apply proper gitignore and clean repository"
+```
+
+### Explication :
+
+- `git rm -r --cached .`
+  → Supprime tous les fichiers de l’index Git (sans les supprimer du disque)
+
+- `git add .`
+  → Réajoute uniquement les fichiers non ignorés
+
+- `git commit`
+  → Valide le nettoyage
+
+---
+
+## 🔎 Vérification
+
+Pour vérifier que tout est propre :
+
+```bash
+git status
+```
+
+Les dossiers suivants ne doivent plus apparaître :
+
+- `build/`
+- `dist/`
+- `*.egg-info/`
+- `__pycache__/`
+- environnements virtuels
 
 ---
 
 # 📦 Déploiement sur PyPI Test (TestPyPI)
 
-[...]
+Une fois votre package Python prêt et testé localement, il est possible de le publier sur **TestPyPI**, un environnement de test officiel de PyPI, avant de le publier sur le dépôt officiel. Cela permet de vérifier que le package peut être installé et utilisé correctement.
 
-*(bloc inchangé, conserve instructions build et upload)*
+---
+
+## 🔧 Prérequis
+
+- Installer **twine** pour la gestion de la publication :
+```bash
+pip install twine
+```
+
+- Vérifier que votre `pyproject.toml` contient bien les informations nécessaires :
+  - `name` : nom du package
+  - `version` : version du package
+  - `authors` : auteur(s)
+  - `description` : description courte
+  - `dependencies` : dépendances éventuelles
+  - `readme` : chemin vers le README.md
+
+---
+
+## 🏗️ Construction des distributions
+
+Depuis la racine du projet, exécuter :
+
+```bash
+python -m build
+```
+
+Cela génère un dossier `dist/` contenant :
+- `calculator_project_26_YP-x.x.x-py3-none-any.whl` → fichier binaire
+- `calculator_project_26_YP-x.x.x.tar.gz` → fichier source
+
+---
+
+## 🚀 Publication sur TestPyPI
+
+1. Publier le package sur TestPyPI :
+```bash
+twine upload --repository testpypi dist/*
+```
+
+2. Lorsque vous y êtes invité, entrer vos identifiants TestPyPI :
+- Nom d’utilisateur
+- Mot de passe
+
+---
+
+## 📥 Installation depuis TestPyPI
+
+Pour tester l’installation de votre package depuis TestPyPI, créer un environnement virtuel et exécuter :
+
+```bash
+pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple calculator_project_26_YP
+```
+
+---
+
+## ✅ Vérification
+
+Après l’installation, vérifier que le package fonctionne correctement :
+
+```python
+from calculator.simple_calculator import SimpleCalculator
+
+calc = SimpleCalculator()
+print(calc.add(3, 5))  # Doit afficher 8
+```
+
+---
+
+## ⚠️ Conseils
+
+- Toujours tester votre package sur TestPyPI avant de le publier sur le dépôt officiel.
+- Mettre à jour le numéro de version dans `pyproject.toml` pour chaque nouvelle publication.
+- Nettoyer les fichiers générés (`dist/`, `build/`) avant chaque nouveau build pour éviter les conflits.
+
+---
+
+## 🌐 Publication finale sur PyPI
+
+Une fois les tests réussis sur TestPyPI, publier sur PyPI officiel :
+
+```bash
+twine upload dist/*
+```
 
 ---
 
@@ -431,30 +614,28 @@ git push origin v0.1.1
 
 ---
 
+# 🚀 Améliorations possibles
+
+- Ajouter une interface CLI
+- Ajouter plus de cas de tests
+- Ajouter un workflow GitHub Actions pour automatiser tests et déploiement
+- Ajouter couverture de code (coverage.py)
+- Intégrer la publication automatisée sur TestPyPI pour chaque version
+
+> Ces améliorations sont des propositions **générées par IA**, et ne sont **pas expliquées** ici pour la simple et bonne raison que **je ne les maîtrise pas**.
+
+---
+
 # 🎯 Résumé final du projet
 
 Ce projet illustre la création complète d’un package Python :
 
 - **Code modulaire et structuré** (`src/calculator`)  
-- **Tests unitaires complets**, incluant gestion des erreurs (`pytest`)  
+- **Tests unitaires automatisés** (`pytest`)  
 - **Analyse qualité et complexité** (`pylint`, `radon`)  
 - **Workflow CI/CD opérationnel** pour tests, build et déploiement sur TestPyPI  
-- **Installation possible depuis GitHub ou TestPyPI** avec version/tag spécifique  
 - **Package installable et prêt pour publication**
 
 Le repository final est propre, maintenable et prêt pour évolution ou distribution.
 
----
 
-# 🔹 Liste des ajouts / modifications majeures
-
-| Bloc / Ligne | Modification |
-|--------------|--------------|
-| Gestion de venv | Explications + commandes de création/activation |
-| CI/CD | Ajout détails sur tags, problèmes rencontrés et solutions |
-| Tests unitaires | Ajout gestion des erreurs, exemples `pytest.raises` |
-| Docstrings | Mention PEP 257 et exemples |
-| Installation GitHub/TestPyPI | Commandes avec version/tag spécifique |
-| Arbre de commit | Illustration de l’historique et choix de tags |
-| Résumé final | Synthèse concise intégrant les éléments manquants du professeur |
-```
