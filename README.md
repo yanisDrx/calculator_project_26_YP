@@ -511,12 +511,74 @@ Le repository final ne contient que :
 Cela garantit :
 
 - Un dépôt propre
-- Une meilleure lisibilité
 - Le respect des standards professionnels
 - Une collaboration facilitée
 - Un package prêt à être déployé sur TestPyPI ou PyPI officiel
 
 ---
+
+# 🚀 CI/CD avec GitHub Actions
+
+Pour ce projet, nous avons intégré un **workflow GitHub Actions** afin d’automatiser la validation du code et la préparation du package. L’objectif est de garantir la qualité et la robustesse avant toute publication sur TestPyPI ou PyPI officiel.
+
+---
+
+## 🧠 Objectifs du workflow CI
+
+- **Automatiser les tests unitaires** avec `pytest`.
+- **Vérifier le style du code** avec `pylint` et `black`.
+- **Analyser la complexité et la maintenabilité** avec `radon`.
+- **Construire le package** (`wheel` et `sdist`) pour préparation au déploiement.
+- **Préparer le déploiement futur** sur TestPyPI/PyPI (CD).
+
+> Pour l’instant, le workflow se concentre sur la CI (tests + qualité + build). Le déploiement automatisé sera ajouté dans une étape suivante.
+
+---
+
+## 🛠️ Étapes réalisées
+
+1. **Création du workflow GitHub Actions**
+   - Fichier : `.github/workflows/main.yml`
+   - Configuration multi-version Python (3.10 et 3.12)
+   - Installation des dépendances nécessaires : `pytest`, `pytest-cov`, `pylint`, `radon`, `black`, `build`, `twine`.
+
+2. **Exécution automatique des jobs**
+   - `lint_test` : lint + tests + vérification du formatage
+   - `metrics` : analyse de complexité et maintenabilité
+   - `build` : construction des distributions
+
+3. **Résolution des erreurs rencontrées**
+   - **Erreur pytest --cov** : ajout de `pytest-cov` aux dépendances pour corriger l’erreur `"unrecognized arguments: --cov=calculator --cov-report=term-missing"`.
+   - **Black détectant un reformat nécessaire** : exécution de `black src/ tests/` pour corriger le formatage et obtenir des jobs verts.
+
+4. **Validation**
+   - Tous les tests passent localement et sur GitHub Actions
+   - Les checks `lint` et `black` sont maintenant verts
+   - Le build génère correctement `dist/` avec `.whl` et `.tar.gz`
+
+---
+
+## 🔎 Lecture des logs et apprentissage
+
+Pendant la mise en place du workflow :
+
+- Lecture des logs GitHub Actions pour identifier :
+  - erreurs de lint ou de formatage
+  - tests échoués ou arguments pytest manquants
+- Résolution étape par étape pour comprendre comment la CI fonctionne.
+- Importance de **corriger les erreurs avant le déploiement**.
+
+---
+
+## 🎯 Résumé pédagogique
+
+- La CI garantit que tout commit est testé et analysé automatiquement.
+- Les erreurs rencontrées sont une opportunité d’apprentissage sur :
+  - gestion des dépendances
+  - formatage et conventions de code
+  - lecture et interprétation des logs CI
+- La prochaine étape sera l’ajout du **déploiement TestPyPI/PyPI** automatisé pour compléter le CD.
+
 
 # 🎯 Qualité globale du projet
 
